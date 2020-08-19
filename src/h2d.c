@@ -48,7 +48,7 @@ remaph2d (SNP ** snpmarkers, int numsnps, Indiv ** indivmarkers,
   int *tind, tt, t, i, j, k, j1, j2;
   Indiv *indx;
   SNP *cupt;
-  char s1[50], s2[50];
+  char s1[120], s2[120];
 
   ZALLOC (g2, numind2, int);
   ZALLOC (g1, numindivs, int);
