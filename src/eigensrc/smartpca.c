@@ -782,6 +782,17 @@ main (int argc, char **argv)
    *  xsnplist[i] = pointer to SNP struct     */
 
   nrows = loadindx (xindlist, xindex, indivmarkers, numindivs);
+ 
+//   check for too many inds right away
+  if (!fastmode) {
+    /* printf("## nrows: %d  ncols  %d\n", nrows, ncols) ; */
+    tt = (int) sqrt (BIGINT);
+    if (nrows >= tt)
+      fatalx
+        ("size of GRM matrix too large: nrows: %d\n Run with fastmode: YES perhaps\n",
+         nrows);
+  }
+ 
   ncols = loadsnpx (xsnplist, snpmarkers, numsnps, indivmarkers);
 
   for (i = 0; i < nrows; i++) {
@@ -825,13 +836,13 @@ main (int argc, char **argv)
 
   }
 
-
-  /* printf("## nrows: %d  ncols  %d\n", nrows, ncols) ; */
-  tt = (int) sqrt (BIGINT);
-  if (nrows >= tt)
-    fatalx
-      ("size of GRM matrix too large: nrows: %d\n Run with fastmode: YES perhaps\n",
-       nrows);
+// now moved up
+//   /* printf("## nrows: %d  ncols  %d\n", nrows, ncols) ; */
+//   tt = (int) sqrt (BIGINT);
+//   if (nrows >= tt)
+//     fatalx
+//       ("size of GRM matrix too large: nrows: %d\n Run with fastmode: YES perhaps\n",
+//        nrows);
 
   ZALLOC (xmean, ncols, double);
   ZALLOC (xfancy, ncols, double);
